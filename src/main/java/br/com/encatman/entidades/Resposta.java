@@ -1,11 +1,25 @@
 package br.com.encatman.entidades;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+@Entity
 public class Resposta {
 
+    @Id
+    @GeneratedValue
+    private Long codigo;
+
+    @ManyToOne
     private Enquete enquete;
+    @ManyToOne
     private Opcao opcao;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date momento;
     private String ip;
     private String extra;
@@ -13,6 +27,14 @@ public class Resposta {
     private String longitude;
 
     public Resposta() {
+    }
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     public Enquete getEnquete() {

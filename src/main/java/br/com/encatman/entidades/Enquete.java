@@ -2,20 +2,35 @@ package br.com.encatman.entidades;
 
 import java.util.List;
 import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Enquete {
 
+    @Id
+    @GeneratedValue
+    private Long codigo;
+    @ManyToOne
     private Usuario usuario;
-
     private String titulo;
-
     private String texto;
-
     private String urlImagem;
-
+    @OneToMany(mappedBy = "enquete")
     private List<Opcao> opcoes;
 
     public Enquete() {
+    }
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     public Usuario getUsuario() {

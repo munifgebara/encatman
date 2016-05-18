@@ -1,14 +1,43 @@
 package br.com.encatman.entidades;
 
+import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+
+@Entity
 public class Usuario {
+
+    @Id
+    @GeneratedValue
+    private Long codigo;
 
     private String nome;
     private String email;
     private String senha;
     private Boolean ativo;
-    
-    public Usuario(){
-        ativo=true;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataNascimento;
+
+    public Usuario() {
+        ativo = true;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     public String getNome() {
