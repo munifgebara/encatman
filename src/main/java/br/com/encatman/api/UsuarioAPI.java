@@ -47,13 +47,31 @@ public class UsuarioAPI extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.getOutputStream().write("Fez um POST".getBytes());
+        String parametros[] = getUrlParameters(request);
+        if (parametros.length == 0) {
+            Usuario novo = mapper.readValue(request.getInputStream(), Usuario.class);
+            Usuario salvar = usuarioNegocio.salvar(novo);
+            response.getOutputStream().write(mapper.writeValueAsBytes(salvar));
+        } else {
+            response.setStatus(400);
+            response.getOutputStream().write(mapper.writeValueAsBytes("Número de parâmetros errado."));
+        }
     }
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.getOutputStream().write("Fez um PUT".getBytes());
+        String parametros[] = getUrlParameters(request);
+        if (parametros.length == 1) {
+            Long id = Long.parseLong(parametros[0]);
+            Usuario novo = mapper.readValue(request.getInputStream(), Usuario.class);
+            novo.setCodigo(id);
+            Usuario salvar = usuarioNegocio.alterar(novo);
+            response.getOutputStream().write(mapper.writeValueAsBytes(salvar));
+        } else {
+            response.setStatus(400);
+            response.getOutputStream().write(mapper.writeValueAsBytes("Número de parâmetros errado."));
+        }
     }
 
     @Override
