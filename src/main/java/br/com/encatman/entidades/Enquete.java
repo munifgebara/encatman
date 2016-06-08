@@ -1,5 +1,7 @@
 package br.com.encatman.entidades;
 
+import br.com.encatman.entidades.Opcao;
+import br.com.encatman.entidades.Usuario;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Entity;
